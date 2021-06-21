@@ -127,8 +127,18 @@ client.on('message', message => {
 				target = target.slice(3,target.length-1);
 
 				numOfPlayers++;
-				message.channel.send(`${pingUser(target)} has added to the pug: (${numOfPlayers} / ${maxPlayers})`);
 				playerArray[numOfPlayers-1] = target;
+
+				const embed = new Discord.MessageEmbed()
+				.setTitle(getUsername(target) + " has added to the PUG: (" + numOfPlayers + " / " + maxPlayers + ")")
+				.setColor('#DAF7A6')
+				.setThumbnail(client.guilds.resolve(message.guild.id).members.resolve(target).user.avatarURL())
+				.addFields(
+					{name: 'Currently added players:',
+					value:getList(playerArray)}
+				)
+				message.channel.send(embed);
+
 				client.user.setActivity(`L4D2 PUGs - (${numOfPlayers}` + "/"+ `${maxPlayers}) !add`);
 
 				if(numOfPlayers === maxPlayers){
@@ -167,10 +177,20 @@ client.on('message', message => {
 					message.channel.send(`You are already added to the current pug ${pingUser(message.author.id)}!`)
 				}else{
 					numOfPlayers++;
-					message.channel.send(`${pingUser(message.author.id)} has added to the pug: (${numOfPlayers} / ${maxPlayers})`);
+
 					//message.member.roles.add(addedRole);
 					playerArray[numOfPlayers-1] = message.author.id;
 					client.user.setActivity(`L4D2 PUGs - (${numOfPlayers}` + "/"+ `${maxPlayers}) !add`); 
+
+					const embed = new Discord.MessageEmbed()
+					.setTitle(getUsername(message.author.id) + " has added to the PUG: (" + numOfPlayers + " / " + maxPlayers + ")")
+					.setColor('#DAF7A6')
+					.setThumbnail(client.guilds.resolve(message.guild.id).members.resolve(message.author.id).user.avatarURL())
+					.addFields(
+						{name: 'Currently added players:',
+						value:getList(playerArray)}
+					)
+					message.channel.send(embed);	
 
 					if(numOfPlayers === maxPlayers){
 
@@ -679,21 +699,21 @@ function getUsername(userID){
 	username = cutuser.username;
 	return username;
 }
-function getList(size, array){
+function getList(array){
 	var list = "";
 
-			for(var i = 0; i < size; i++){
-				if(array[i] != null && array[i] != ""){
-					const User = client.users.cache.get(array[i]); // Getting the user by ID.
+	for(var i = 0; i < maxPlayers; i++){
+		if(array[i] != null && array[i] != ""){
+			const User = client.users.cache.get(array[i]);
 
-					list += (`${i+1}) ${pingUser(array[i])}`);
-					list += "\n";
-				}
-			}
-			if(list.length == 0){
-					list += " ";
-			}
-			return list;
+			list += (`${i+1}) ${pingUser(array[i])}`);
+			list += "\n";
+		}
+	}
+	if(list.length == 0){
+			list += " ";
+	}
+	return list;
 }
 client.login(token);
 
