@@ -1,6 +1,6 @@
 {
 	"prefix": "!",
-	"token": "TOKENHERE",
+	"token": "PLACEYOURTOKENHERE",
 	
     "maps" : [ "Dead Center", "Passifice", "Dark Carnival", "Swamp Fever", "Hard Rain", "The Parish", "No Mercy", "Death Toll", "Dead Air", "Blood Harvest" ]
 
