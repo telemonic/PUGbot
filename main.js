@@ -376,6 +376,7 @@ client.on('message', message => {
 	else if(command == "captain"){
 		if(message.member.roles.cache.some(role => role.name === 'Pug Admin') || message.member.roles.cache.some(role => role.name === 'Server Admin')){
 			
+			//console.log("got command");
 			if (!args.length) {
 				message.channel.send("Invalid syntax, use !captain @User");
 			}else{
@@ -384,19 +385,23 @@ client.on('message', message => {
 
 				captainArray[numOfCaptains] = target;
 				numOfCaptains++;
+				//console.log(numOfCaptains);
 
 				if(numOfCaptains == 2){
 					message.channel.send(`Captains are ${captainArray[0]} and ${captainArray[1]}`);
 
 					for(var i = 0; i < maxPlayers; i++){
+						//console.log("I RAN THIS FOR LOOP")
 						var compare = `<@!${pickArray[i]}>`;
 						if(compare == captainArray[0]){
 							captain1Array[0] = pickArray[i];
 							pickArray[i] = "";
+							//console.log("I RAN THIS CODE")
 						}
 						if(compare == captainArray[1]){
 							captain2Array[0] = pickArray[i];
 							pickArray[i] = "";
+							//console.log("I RAN THIS CODE 2")
 						}
 					}
 
@@ -491,7 +496,7 @@ client.on('message', message => {
 		}
 	}
 	else if(command === "survivor"){
-		var messageAuthor = `${pingUser(message.author.id)}`;
+		var messageAuthor = `<@!${message.author.id}>`;
 		var survivorMsg = "";
 		var infectedMsg = "";
 
@@ -507,8 +512,8 @@ client.on('message', message => {
 		}
 
 		for(var i = 0; i < maxPlayers/2; i++){
-			survivorMsg += `${pingUser(survivorArray[i])}` + '\n';
-			infectedMsg += `${pingUser(infectedArray[i])} ` + '\n';
+			survivorMsg += `<@${survivorArray[i]}>` + '\n';	
+			infectedMsg += `<@${infectedArray[i]}> ` + '\n';
 		}
 		
 		var currentdate = new Date(); 
@@ -541,7 +546,7 @@ client.on('message', message => {
 		 
 	}
 	else if(command === "infected"){
-		var messageAuthor = `${pingUser(message.author.id)}`;
+		var messageAuthor = `<@!${message.author.id}>`;
 		var survivorMsg = "";
 		var infectedMsg = "";
 
@@ -557,8 +562,8 @@ client.on('message', message => {
 		}
 
 		for(var i = 0; i < maxPlayers/2; i++){
-			survivorMsg += `${pingUser(survivorArray[i])} ` + '\n';
-			infectedMsg += `${pingUser(infectedArray[i])} ` + '\n';
+			survivorMsg += `<@${survivorArray[i]}>` + '\n';	
+			infectedMsg += `<@${infectedArray[i]}> ` + '\n';
 		}
 
 		var currentdate = new Date(); 
