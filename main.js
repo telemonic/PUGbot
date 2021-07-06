@@ -536,6 +536,7 @@ function printHelp(message){
         - side: *Picks either infected or survivor start if you are prompted.*
         - help: *Prints this message.*
         
+		Github link: https://github.com/telemonic/PUGbot
         `);
        });
 }
