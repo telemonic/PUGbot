@@ -363,7 +363,7 @@ function voteMap(message, vote){
                         mapsVoteCount++;
                         
                         //adds player to the array to stop dupe voting
-                        //mapVotingArrayPlayers[mapsVoteCount] = message.author.id;
+                        mapVotingArrayPlayers[mapsVoteCount] = message.author.id;
 
                     }   
                 }else{
@@ -540,11 +540,11 @@ function printHelp(message){
         - start: *Starts the PUG once the player cap is reached.*
         - captains: *Declares the two team captains for the PUG (Usage: captains @captain1 @captain2)*
         - maxplayers: *Changes the max players to the value specified. (Warning: Will reset current PUG.)*
-        - endpug: ends the current pug.
+        - endpug: ends the current PUG.
 
         Player Commands:
-        - add: *Adds you to the current pug.*
-        - remove: *Removes you from the current pug.*
+        - add: *Adds you to the current PUG.*
+        - remove: *Removes you from the current PUG.*
         - vote: *Submits your vote for a map once map voting is open (Usage: vote #)*
         - pick: *Picks a user for your team, if you are a team captain (Usage: pick #)*
         - side: *Picks either infected or survivor start if you are prompted.*
