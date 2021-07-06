@@ -22,7 +22,7 @@ var c2Array = [maxPlayers/2] // Array of players for team captain 2
 var currentlyPicking = "";
 var c1StartSide = "";
 var c2StartSide = "";
-
+var adminRole;
 //Arrays
 playerArray = [maxPlayers]; //initializes playerArray
 mapsArray = config.maps; //sets mapsArray to the maps defined in config.json
@@ -43,14 +43,12 @@ client.once('ready', () => {
 
 client.on('message', message => {
     //Role Getters
-    try {
-        let adminRole = message.guild.roles.cache.find(role => role.name === "Pug Admin");
-      } catch (error) {
-      }
-
 
     //checks for prefix
     if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	//Ignores DMs
+	if (message.channel instanceof Discord.DMChannel) return;
 
     cPrint("Command was recieved by " + message.author.username + ": " + message.content);
 
@@ -66,6 +64,7 @@ client.on('message', message => {
             if(phasePugOpen == false){
                 phasePugOpen = true;
                 message.channel.send("PUG has been opened by " + pingUser(message.author.id) + ". Do !add to join!");
+				client.user.setActivity(`L4D2 PUGs - (${playerCount}` + "/"+ `${maxPlayers}) !add`);
             }else{
                 message.channel.send("There is already a PUG open!");
             }
@@ -120,7 +119,9 @@ client.on('message', message => {
     else if(command === 'captains'){
         if(args.length){
             if(args.length == 2){
-                pickCaptain(message, args[0], args[1]);
+				if(checkAdded(trimID(args[0]), playerArray) && checkAdded(trimID(args[1]), playerArray)){
+					pickCaptain(message, args[0], args[1]);
+				}
             }
         }
     }
@@ -140,7 +141,7 @@ client.on('message', message => {
                         message.channel.send("Error selecting user, please try again.");
                     }
                 }else{
-                    message.channel.send("Inavlid syntax, please do !pick @player");
+                    message.channel.send("Inavlid syntax, please do !pick #");
                 }
             }else{
                 message.channel.send("You are not currently picking!");
@@ -179,9 +180,14 @@ client.on('message', message => {
             }
         }
     }
+	else if (command === 'endpug'){
+		resetPUG();
+		message.channel.send("PUG has been ended.");
+	}
     //checks if pug is filled
     if(phasePugOpen == true){
         if (playerCount == maxPlayers){
+			adminRole = message.guild.roles.cache.find(role => role.name === "Pug Admin");
             message.channel.send(pingRole(adminRole) + "The PUG has reached " + playerCount + " / " + maxPlayers + " players and is ready to !start");
         }
     }else if(phaseMapVote == true){
@@ -190,6 +196,7 @@ client.on('message', message => {
         }
     //checks for captain pick phase
     }if(phaseCaptainPick == true){
+		adminRole = message.guild.roles.cache.find(role => role.name === "Pug Admin");
         message.channel.send(pingRole(adminRole) + " Declare two captains by doing !captains @Captain1 @Captain2");
     }
     if(phasePlayerPick == true){
@@ -203,6 +210,10 @@ client.on('message', message => {
         phasePugStart = false;
         resetPUG();
     }
+	//azure is an idiot
+	if (message.author.id === '72559613681078272') {
+		message.react('862066693978587216');
+	}
 });
 
 //functions
@@ -283,6 +294,7 @@ function addPlayer(message, id){
                     {name: 'Currently added players:',
                     value:getList(playerArray)})
                 message.channel.send(embed);
+				client.user.setActivity(`L4D2 PUGs - (${playerCount}` + "/"+ `${maxPlayers}) !add`); 
             }else{
                 message.channel.send("The PUG is currently full.");
             }
@@ -308,6 +320,7 @@ function removePlayer(message, id){
                 {name: 'Currently added players:',
                 value:getList(playerArray)})
             message.channel.send(embed);
+			client.user.setActivity(`L4D2 PUGs - (${playerCount}` + "/"+ `${maxPlayers}) !add`); 
         }else{
             message.channel.send("You cannot remove at this time.");
         }
@@ -527,7 +540,8 @@ function printHelp(message){
         - start: *Starts the PUG once the player cap is reached.*
         - captains: *Declares the two team captains for the PUG (Usage: captains @captain1 @captain2)*
         - maxplayers: *Changes the max players to the value specified. (Warning: Will reset current PUG.)*
-        
+        - endpug: ends the current pug.
+
         Player Commands:
         - add: *Adds you to the current pug.*
         - remove: *Removes you from the current pug.*
@@ -536,7 +550,7 @@ function printHelp(message){
         - side: *Picks either infected or survivor start if you are prompted.*
         - help: *Prints this message.*
         
-		Github link: https://github.com/telemonic/PUGbot
+		Github link: *https://github.com/telemonic/PUGbot*
         `);
        });
 }
