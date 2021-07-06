@@ -533,24 +533,24 @@ function printHelp(message){
     client.users.fetch(message.author.id, false).then((user) => {
         user.send(`**PUGBot v2.0 - By Telemonic**
         
-        Admin Commands: 
-        - createpug: *opens up the PUG for users to add. Must have the "Pug Admin" role to use.*
-        - forceadd: *forcibly adds a user to the current PUG.*
-        - kick: *Kicks a user from the PUG.*
-        - start: *Starts the PUG once the player cap is reached.*
-        - captains: *Declares the two team captains for the PUG (Usage: captains @captain1 @captain2)*
-        - maxplayers: *Changes the max players to the value specified. (Warning: Will reset current PUG.)*
-        - endpug: ends the current PUG.
+Admin Commands: 
+    - ${prefix}createpug: *opens up the PUG for users to add. Must have the "Pug Admin" role to use.*
+    - ${prefix}forceadd: *forcibly adds a user to the current PUG.*
+    - ${prefix}kick: *Kicks a user from the PUG.*
+    - ${prefix}start: *Starts the PUG once the player cap is reached.*
+    - ${prefix}captains: *Declares the two team captains for the PUG (Usage: captains @captain1 @captain2)*
+    - ${prefix}maxplayers: *Changes the max players to the value specified. (Warning: Will reset current PUG)*
+    - ${prefix}endpug: ends the current PUG.
 
-        Player Commands:
-        - add: *Adds you to the current PUG.*
-        - remove: *Removes you from the current PUG.*
-        - vote: *Submits your vote for a map once map voting is open (Usage: vote #)*
-        - pick: *Picks a user for your team, if you are a team captain (Usage: pick #)*
-        - side: *Picks either infected or survivor start if you are prompted.*
-        - help: *Prints this message.*
+Player Commands:
+    - ${prefix}add: *Adds you to the current PUG.*
+    - ${prefix}remove: *Removes you from the current PUG.*
+    - ${prefix}vote: *Submits your vote for a map once map voting is open (Usage: vote #)*
+    - ${prefix}pick: *Picks a user for your team, if you are a team captain (Usage: pick #)*
+    - ${prefix}side: *Picks either infected or survivor start if you are prompted.*
+    - ${prefix}help: *Prints this message.*
         
-		Github link: *https://github.com/telemonic/PUGbot*
+Github link: *https://github.com/telemonic/PUGbot*
         `);
        });
 }
