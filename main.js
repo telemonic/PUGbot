@@ -8,7 +8,7 @@ const client = new Discord.Client();
 globalDebug = true; //Prints otuput to console
 
 //Variables
-var maxPlayers = 4; //Total Max Players (i.e. 8 players means 4 vs 4)
+var maxPlayers = 8; //Total Max Players (i.e. 8 players means 4 vs 4)
 var playerCount = 0; //Current player count
 var mapsVoteCount = 0; //tracks amount of Votes for map voting
 var selectedMap = "";
