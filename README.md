@@ -5,6 +5,7 @@ A discord bot for running L4D2 pugs using node.js
 # Installation
 
 Extract the folder and and run main.js by using "node main.js"
+
 Configure the settings in config.json
 
 ## Dependencies
