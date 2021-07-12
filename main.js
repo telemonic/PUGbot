@@ -620,6 +620,7 @@ Admin Commands:
     - ${prefix}maxplayers: *Changes the max players to the value specified. (Warning: Will reset current PUG.)*
     - ${prefix}endpug: ends the current PUG.
     - ${prefix}endvoting: *Ends the voting early and uses the current votes*
+    - ${prefix}server: *Changes the default server IP that is displayed once the pug starts. (Usage: server IP*
 
 Player Commands:
     - ${prefix}add: *Adds you to the current PUG.*
