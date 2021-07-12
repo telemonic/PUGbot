@@ -1,7 +1,12 @@
 {
 	"prefix": "!",
-	"token": "PLACEYOURTOKENHERE",
+	"token": "YOURTOKENHERE",
 	
-    "maps" : [ "Dead Center", "Passifice", "Dark Carnival", "Swamp Fever", "Hard Rain", "The Parish", "No Mercy", "Death Toll", "Dead Air", "Blood Harvest" ]
-
+    "maps" : [ "Dead Center", "Passifice", "Dark Carnival", "Swamp Fever", "Hard Rain", "The Parish", "No Mercy", "Death Toll", "Dead Air", "Blood Harvest" ],
+	"maxplayers": 8,
+	"mapVoteTime": 60,
+	"lobbyID": "YOURLOBBYIDHERE",
+	"pugChannelID": "YOURCHANNELIDHERE",
+	"adminID": "YOURADMINIDHERE",
+	"defaultServerID": "YOURDEFAULTSERVERHERE"
 }
