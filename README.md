@@ -6,6 +6,8 @@ A discord bot for running L4D2 pugs using node.js
 
 Extract the folder and and run main.js by using "node main.js"
 
+Configure the settings in config.json
+
 ## Dependencies
 
 Node.js
@@ -43,6 +45,8 @@ Player Commands:
 - side: *Picks either infected or survivor start if you are prompted.*
 
 - help: *Prints this message.*
+
+- $server: *Changes the default server IP that is displayed once the pug starts. (Usage: server IP*
 
 ## Customization
 
