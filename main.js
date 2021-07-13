@@ -153,7 +153,7 @@ client.on('message', message => {
         }
     }
     //captain delcare command
-    else if(command === 'captains'){
+    else if(command === 'captains' || command === 'captain'){
         if(checkAdmin(message)){
             if(args.length){
                 if(args.length == 2){
@@ -474,7 +474,7 @@ function getMap(message){
     mapIMG = replaceMap(mapIMG)
     const embed = new Discord.MessageEmbed()
 
-    .setTitle('Map Voting - ' + mapsArray[maxIndex] + " won with " + mapVotingArrayMaps[maxIndex] + " / " + mapsVoteCount + " votes")
+    .setTitle('Map Voting - ' + mapsArray[maxIndex] + " won with (" + mapVotingArrayMaps[maxIndex] + " / " + mapsVoteCount + ") votes")
     .setColor('#DAF7A6')
     .attachFiles([`./images/${mapIMG}.png`])
     .setThumbnail(`attachment://${mapIMG}.png`)
